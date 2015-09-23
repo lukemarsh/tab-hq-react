@@ -20,9 +20,11 @@ ResponseHelper.prototype.sendResponseWithStatus = function(res, status, err, dat
 };
 
 ResponseHelper.prototype.sanitizeDbResult = function(obj) {
-  if (!obj) { return null };
+  if (!obj) { return obj; };
 
   var sanitizeWithId = function (idObj) {
+    if (!idObj) { return idObj; }
+
     if (idObj.toObject) {
       idObj = idObj.toObject();
     }
@@ -36,6 +38,8 @@ ResponseHelper.prototype.sanitizeDbResult = function(obj) {
   }
 
   var walkObjectTree = function(root) {
+    if (!root) { return root; }
+
     if (Array.isArray(root)) {
       root = root.map(function(item) { 
         var sanitizedItem = sanitizeWithId(item);
