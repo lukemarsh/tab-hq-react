@@ -20,7 +20,7 @@ ResponseHelper.prototype.sendResponseWithStatus = function(res, status, err, dat
 };
 
 ResponseHelper.prototype.sanitizeDbResult = function(obj) {
-  if (!obj) { return null };
+  if (!obj) { return obj; };
 
   var sanitizeWithId = function (idObj) {
     if (!idObj) { return idObj; }
