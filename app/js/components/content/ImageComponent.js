@@ -14,11 +14,17 @@ var ImageComponent = React.createClass({
 
   render: function () {
     var component = this.props.component;
+    var classes;
+    var isAdmin = this.props.isAdmin;
+
+    if (isAdmin) {
+      classes = "template";
+    }
 
     return (
-        <div className='template' data-droppable="component" data-order={component.order}>
+        <div className={classes} data-droppable="component" data-order={component.order}>
            <DropFileComponent type={'image'} addImage={this.props.addImage} addLink={this.props.addLink} isAdmin={this.props.isAdmin}></DropFileComponent>
-           <PageComponentActions components={this.props.components} componentId={this.props.componentId} dragStart={this.props.dragStart} dragEnd={this.props.dragEnd} mouseDown={this.props.mouseDown} />
+           <PageComponentActions isAdmin={this.props.isAdmin} components={this.props.components} componentId={this.props.componentId} dragStart={this.props.dragStart} dragEnd={this.props.dragEnd} mouseDown={this.props.mouseDown} />
         </div>
       );
   }

@@ -59,22 +59,28 @@ var ContentSection = React.createClass({
   render: function () {
     var section = this.props.section;
     var sectionId = section.id;
+    var isAdmin = this.props.isAdmin;
 
-    var titleInputStyle = { display: this.state.isEditing ? 'block' : 'none' };
-    var titleStyle = { display: !this.state.isEditing ? 'block' : 'none' };
+    var titleInputStyle = { display: this.state.isEditing || isAdmin ? 'block' : 'none' };
+    var titleStyle = { display: !this.state.isEditing || !isAdmin ? 'block' : 'none' };
+    var sectionActions;
+
+    var sectionHeading = <span style={titleStyle}>{section.title}</span>;
+
+    if (isAdmin) {
+      sectionHeading = <input style={titleInputStyle} type="text" maxLength="20" ref="sectionInput" name="title" value={this.state.sectionName} onChange={this.handleInputChange} onKeyDown={this.update} />;
+      sectionActions = <div className="actions">
+        <i className="fa fa-pencil fa-2x" onClick={this.handleEditSectionName}></i>
+        <i className="fa fa-trash-o fa-2x" onClick={this.deleteSection}></i>
+      </div>;
+    }
 
     return (
         <section ref={'section_' + sectionId}>
           <div className='content-inner'>
             <header>
-              <h1>
-                <span style={titleStyle}>{section.title}</span>
-                <input style={titleInputStyle} type="text" maxLength="20" ref="sectionInput" name="title" value={this.state.sectionName} onChange={this.handleInputChange} onKeyDown={this.update} />
-              </h1>
-              <div className="actions">
-                <i className="fa fa-pencil fa-2x" onClick={this.handleEditSectionName}></i>
-                <i className="fa fa-trash-o fa-2x" onClick={this.deleteSection}></i>
-              </div>
+              <h1>{sectionHeading}</h1>
+              {sectionActions}
             </header>
             <PageComponent template={this.props.template} isAdmin={this.props.isAdmin} sectionId={sectionId} />
           </div>

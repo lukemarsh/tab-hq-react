@@ -71,10 +71,15 @@ var ListComponent = React.createClass({
     var links = this.state.data.links;
     var component =  this.props.component;
     var isAdmin = this.props.isAdmin;
+    var classes = "list";
+
+    if (isAdmin) {
+      classes += " template";
+    }
 
     this.loadDraggableData(this.props.data.links);
     return (
-        <div className="template list" data-droppable="component" data-order={component.order} onDragOver={this.dragOver}>
+        <div className={classes} data-droppable="component" data-order={component.order} onDragOver={this.dragOver}>
           <div onDrop={this.drop}>
             <div className="files">
               {links.map(function(item, index) {
@@ -83,7 +88,7 @@ var ListComponent = React.createClass({
             </div>
             <DropFileComponent type={'link'} isAdmin={isAdmin} addImage={this.addImage} addLink={this.addLink}></DropFileComponent>
           </div>
-          <PageComponentActions componentId={this.props.componentId} dragStart={this.props.dragStart} dragEnd={this.props.dragEnd} mouseDown={this.props.mouseDown} />
+          <PageComponentActions isAdmin={isAdmin} componentId={this.props.componentId} dragStart={this.props.dragStart} dragEnd={this.props.dragEnd} mouseDown={this.props.mouseDown} />
         </div>
       );
   }
