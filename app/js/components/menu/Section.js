@@ -59,16 +59,17 @@ var Section = React.createClass({
 
   render: function () {
     var section = this.props.section;
+    var userIsAdmin = this.props.userIsAdmin;
     var titleInputStyle = { display: this.state.isEditing ? 'block' : 'none' };
-    var titleStyle = { display: !this.state.isEditing ? 'block' : 'none' };
-    var isAdmin = this.props.isAdmin;
+    var titleStyle = { display: !(this.state.isEditing && userIsAdmin) ? 'block' : 'none' };
     var deleteAction;
     var actions;
+    
     var sectionName = <div>
       <span style={titleStyle}>{section.title}</span>
     </div>;
 
-    if (isAdmin) {
+    if (userIsAdmin) {
       deleteAction = <div className="actions left">
         <i className="fa fa-remove" onClick={this.deleteSection}></i>
       </div>;

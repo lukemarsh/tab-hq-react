@@ -44,7 +44,7 @@ var NewSectionComponent = React.createClass({
     var template;
     var style = { display : this.state.plusButtonVisible ? 'block' : 'none'};
 
-    if (this.props.isAdmin) {
+    if (this.props.userIsAdmin) {
       if (sectionComponentSelectorVisible) {
         template = <div className="row new-section-component-selector">
           <div className="col-md-6 col-md-offset-3 text-center">

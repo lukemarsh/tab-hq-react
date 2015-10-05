@@ -60,7 +60,11 @@ var Category = React.createClass({
   render: function () {
     var category = this.props.category;
     var isVisible = this.state.isVisible;
+    var userIsAdmin = this.props.userIsAdmin;
     var currentSection = this.props.currentSection;
+    var deleteAction;
+    var arrows;
+
     var classes = classNames(
       {'has-sections' : true },
       {'open' : isVisible}
@@ -69,18 +73,23 @@ var Category = React.createClass({
       {'fa fa-caret-down' : isVisible},
       {'fa fa-caret-right' : !isVisible}
     );
+
     var titleInputStyle = { display: this.state.isEditing ? 'block' : 'none' };
-    var titleStyle = { display: !this.state.isEditing ? 'block' : 'none' };
+    var titleStyle = { display: !(this.state.isEditing && userIsAdmin) ? 'block' : 'none' };
+
+    if (category.sections.length) {
+      arrows = <i className={ toggleClasses }></i>;
+    }
+
     var actions = <div className="category-actions actions right">
-      <i className={ toggleClasses }></i>
+      { arrows }
     </div>;
+
     var categoryName = <div>
       <span style={titleStyle}>{category.title}</span>
     </div>;
-    var deleteAction;
-    var isAdmin = this.props.isAdmin;
 
-    if (isAdmin) {
+    if (userIsAdmin) {
       deleteAction = <div className="actions left">
         <i className="fa fa-remove" onClick={this.deleteCategory}></i>
       </div>;
@@ -103,7 +112,7 @@ var Category = React.createClass({
           <h3 className={ classes } onClick={this.handleClick}>
             {categoryName}
           </h3>
-          <MenuSections isAdmin={isAdmin} category={category} isVisible={this.state.isVisible} currentSection={currentSection} />
+          <MenuSections userIsAdmin={userIsAdmin} category={category} isVisible={this.state.isVisible} currentSection={currentSection} />
         </div>
       );
   }

@@ -59,16 +59,23 @@ var ContentSection = React.createClass({
   render: function () {
     var section = this.props.section;
     var sectionId = section.id;
-    var isAdmin = this.props.isAdmin;
+    var userIsAdmin = this.props.userIsAdmin;
 
-    var titleInputStyle = { display: this.state.isEditing || isAdmin ? 'block' : 'none' };
-    var titleStyle = { display: !this.state.isEditing || !isAdmin ? 'block' : 'none' };
+    var titleInputStyle = { display: this.state.isEditing ? 'block' : 'none' };
+    var titleStyle = { display: !(this.state.isEditing && userIsAdmin) ? 'block' : 'none' };
     var sectionActions;
 
-    var sectionHeading = <span style={titleStyle}>{section.title}</span>;
+    var sectionHeading = <div>
+      <span style={titleStyle}>{section.title}</span>
+    </div>;
 
-    if (isAdmin) {
-      sectionHeading = <input style={titleInputStyle} type="text" maxLength="20" ref="sectionInput" name="title" value={this.state.sectionName} onChange={this.handleInputChange} onKeyDown={this.update} />;
+    if (userIsAdmin) {
+      sectionHeading = <div>
+        <input style={titleInputStyle} type="text" maxLength="20" ref="sectionInput"
+        name="title" value={this.state.sectionName} onChange={this.handleInputChange}
+        onKeyDown={this.update} />
+        <span style={titleStyle}>{section.title}</span>
+      </div>
       sectionActions = <div className="actions">
         <i className="fa fa-pencil fa-2x" onClick={this.handleEditSectionName}></i>
         <i className="fa fa-trash-o fa-2x" onClick={this.deleteSection}></i>
@@ -82,7 +89,7 @@ var ContentSection = React.createClass({
               <h1>{sectionHeading}</h1>
               {sectionActions}
             </header>
-            <PageComponent template={this.props.template} isAdmin={this.props.isAdmin} sectionId={sectionId} />
+            <PageComponent template={this.props.template} userIsAdmin={this.props.userIsAdmin} sectionId={sectionId} />
           </div>
         </section>
       );

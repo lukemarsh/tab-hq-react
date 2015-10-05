@@ -70,10 +70,10 @@ var ListComponent = React.createClass({
   render: function () {
     var links = this.state.data.links;
     var component =  this.props.component;
-    var isAdmin = this.props.isAdmin;
+    var userIsAdmin = this.props.userIsAdmin;
     var classes = "list";
 
-    if (isAdmin) {
+    if (userIsAdmin) {
       classes += " template";
     }
 
@@ -83,12 +83,12 @@ var ListComponent = React.createClass({
           <div onDrop={this.drop}>
             <div className="files">
               {links.map(function(item, index) {
-                return (<ListItemComponent key={index} updateListItem={this.updateListItem.bind(null, index)} dragStart={this.dragStart} dragEnd={this.dragEnd} mouseDown={this.mouseDown} item={item} onClick={this.removeLink.bind(null, index)} isAdmin={isAdmin}></ListItemComponent>);
+                return (<ListItemComponent key={index} updateListItem={this.updateListItem.bind(null, index)} dragStart={this.dragStart} dragEnd={this.dragEnd} mouseDown={this.mouseDown} item={item} onClick={this.removeLink.bind(null, index)} userIsAdmin={userIsAdmin}></ListItemComponent>);
               }.bind(this))}
             </div>
-            <DropFileComponent type={'link'} isAdmin={isAdmin} addImage={this.addImage} addLink={this.addLink}></DropFileComponent>
+            <DropFileComponent type={'link'} userIsAdmin={userIsAdmin} addImage={this.addImage} addLink={this.addLink}></DropFileComponent>
           </div>
-          <PageComponentActions isAdmin={isAdmin} componentId={this.props.componentId} dragStart={this.props.dragStart} dragEnd={this.props.dragEnd} mouseDown={this.props.mouseDown} />
+          <PageComponentActions userIsAdmin={userIsAdmin} componentId={this.props.componentId} dragStart={this.props.dragStart} dragEnd={this.props.dragEnd} mouseDown={this.props.mouseDown} />
         </div>
       );
   }

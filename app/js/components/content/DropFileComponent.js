@@ -21,7 +21,7 @@ var DropFileComponent = React.createClass({
     }
     googleDriveButton = <button id="google-button" className="btn btn-default" onClick={this.addFilesFromGoogleDrive}>Add from Google Drive</button>;
 
-    if (this.props.isAdmin) {
+    if (this.props.userIsAdmin) {
       return (
           <div className="text-center dropzone">
             <a href="#">
