@@ -74,8 +74,8 @@ var ListComponent = React.createClass({
 
     this.loadDraggableData(this.props.data.links);
     return (
-        <div className="template list" data-droppable="component" data-order={component.order} onDragOver={this.dragOver}>
-          <div onDrop={this.drop}>
+        <div className="template list" data-order={component.order} data-droppable="component" draggable="true" onMouseDown={this.props.mouseDown} onDragEnd={this.props.dragEnd} onDragStart={this.props.dragStart} onDragOver={this.dragOver}>
+          <div>
             <div className="files">
               {links.map(function(item, index) {
                 return (<ListItemComponent key={index} updateListItem={this.updateListItem.bind(null, index)} dragStart={this.dragStart} dragEnd={this.dragEnd} mouseDown={this.mouseDown} item={item} onClick={this.removeLink.bind(null, index)} isAdmin={isAdmin}></ListItemComponent>);
@@ -83,7 +83,7 @@ var ListComponent = React.createClass({
             </div>
             <DropFileComponent type={'link'} isAdmin={isAdmin} addImage={this.addImage} addLink={this.addLink}></DropFileComponent>
           </div>
-          <PageComponentActions componentId={this.props.componentId} dragStart={this.props.dragStart} dragEnd={this.props.dragEnd} mouseDown={this.props.mouseDown} />
+          <PageComponentActions componentId={this.props.componentId} />
         </div>
       );
   }

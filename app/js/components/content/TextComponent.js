@@ -18,9 +18,9 @@ var TextComponent = React.createClass({
     var component = this.props.component;
 
     return (
-        <div className='template' data-droppable="component" data-order={component.order}>
+        <div className='template' data-order={component.order} data-droppable="component" draggable="true" onMouseDown={this.props.mouseDown} onDragEnd={this.props.dragEnd} onDragStart={this.props.dragStart}>
            <Editor className='editor' text={this.props.data} sectionId={this.props.sectionId} onChange={this.handleContentChange} options={{buttons: ['bold', 'italic', 'underline', 'anchor', 'header2']}}/>
-           <PageComponentActions components={this.props.components} componentId={this.props.componentId} dragStart={this.props.dragStart} dragEnd={this.props.dragEnd} mouseDown={this.props.mouseDown} />
+           <PageComponentActions components={this.props.components} componentId={this.props.componentId} />
         </div>
       );
   }

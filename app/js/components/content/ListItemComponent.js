@@ -164,7 +164,7 @@ var ListItemComponent = React.createClass({
     }
 
     return (
-      <div data-order={item.order} className="list-item" data-droppable="item">
+      <div data-order={item.order} className="list-item" data-droppable="item" draggable="true" onMouseDown={this.props.mouseDown} onDragEnd={this.props.dragEnd} onDragStart={this.props.dragStart}>
         <div className="remove pull-left" onClick={this.props.onClick.bind(null, item)}>
           <i className="fa fa-remove fa-lg"></i>
         </div>
@@ -191,7 +191,7 @@ var ListItemComponent = React.createClass({
               {image}
             </a>
           </div>
-          <div className="pull-left re-order" data-parent="true" draggable="true" onMouseDown={this.props.mouseDown} onDragEnd={this.props.dragEnd} onDragStart={this.props.dragStart}>
+          <div className="pull-left re-order">
             <i className="fa fa-reorder fa-lg drag-controller"></i>
           </div>
         </div>

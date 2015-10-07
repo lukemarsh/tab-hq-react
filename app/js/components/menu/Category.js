@@ -72,11 +72,11 @@ var Category = React.createClass({
     var titleInputStyle = { display: this.state.isEditing ? 'block' : 'none' };
     var titleStyle = { display: !this.state.isEditing ? 'block' : 'none' };
     return (
-        <div data-order={category.order} data-droppable="category" style={{pointerEvents: 'all'}}>
+        <div data-order={category.order} data-droppable="category" draggable="true" onMouseDown={this.props.mouseDown} onDragEnd={this.props.dragEnd} onDragStart={this.props.dragStart}>
           <div className="actions left">
             <i className="fa fa-remove" onClick={this.deleteCategory}></i>
           </div>
-          <div className="actions right" draggable="true" data-parent="true" onDragStart={this.props.dragStart} onDragEnd={this.props.dragEnd} onMouseDown={this.props.mouseDown}>
+          <div className="actions right">
             <i className={ toggleClasses }></i>
             <i className="fa fa-reorder ui-sortable-handle drag-controller"></i>
           </div>
@@ -84,7 +84,6 @@ var Category = React.createClass({
             <input style={titleInputStyle} type="text" maxLength="20" ref="theInput" name="title" value={this.state.categoryName} onChange={this.handleInputChange} onKeyDown={this.updateCategory} />
             <span style={titleStyle}>{category.title}<i className="fa fa-pencil" onClick={this.handleEditTitle}></i></span>
           </h3>
-          <MenuSections category={category} isVisible={this.state.isVisible} currentSection={currentSection} />
         </div>
       );
   }

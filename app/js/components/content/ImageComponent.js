@@ -16,9 +16,9 @@ var ImageComponent = React.createClass({
     var component = this.props.component;
 
     return (
-        <div className='template' data-droppable="component" data-order={component.order}>
+        <div className='template' data-order={component.order} data-droppable="component" draggable="true" onMouseDown={this.props.mouseDown} onDragEnd={this.props.dragEnd} onDragStart={this.props.dragStart}>
            <DropFileComponent type={'image'} addImage={this.props.addImage} addLink={this.props.addLink} isAdmin={this.props.isAdmin}></DropFileComponent>
-           <PageComponentActions components={this.props.components} componentId={this.props.componentId} dragStart={this.props.dragStart} dragEnd={this.props.dragEnd} mouseDown={this.props.mouseDown} />
+           <PageComponentActions components={this.props.components} componentId={this.props.componentId} />
         </div>
       );
   }
