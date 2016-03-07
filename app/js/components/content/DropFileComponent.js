@@ -42,7 +42,7 @@ const DropFileComponent = React.createClass({
               <i className='fa fa-cloud-upload fa-3x' />
             </a>
             <h3>Drag & Drop</h3>
-            <input id="upload" onChange={this.fileUploaded} type="file" ref='upload' style={{display: 'none'}} />
+            <input id='upload' onChange={this.fileUploaded} type='file' ref='upload' style={{display: 'none'}} />
             <p>or <a href='#' onClick={this.triggerFileUpload}>browse</a></p>
             <div className={classes}>
               {addLinkButton}

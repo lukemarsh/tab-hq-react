@@ -47,6 +47,10 @@ const ComponentStore = Reflux.createStore({
     return _.where(_components, { sectionid: sectionId });
   },
 
+  clearAllBySectionId(sectionId) {
+    _.remove(_components, { sectionid: sectionId });
+  },
+
   getAll() {
     return _components;
   }

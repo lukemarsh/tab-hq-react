@@ -13,6 +13,7 @@ import Menu from './components/menu/Menu';
 import Content from './components/content/Content';
 import Header from './components/Header';
 import ExecutionEnvironment from 'exenv';
+import classNames from 'classnames';
 
 require('../styles/main.sass');
 
@@ -20,7 +21,6 @@ function getStateFromStores() {
   return {
     allCategories: CategoryStore.getCategories(),
     isSearchInProgress: AppStore.isSearchInProgress(),
-    userIsAdmin: false,
     user: UserStore.getUser()
   };
 }
@@ -48,7 +48,9 @@ const App = React.createClass({
   },
 
   getInitialState() {
-    return getStateFromStores();
+    let initialState = getStateFromStores();
+    initialState.userIsAdmin = false;
+    return initialState;
   },
 
   toggleAdminMode() {
@@ -57,17 +59,32 @@ const App = React.createClass({
     });
   },
 
-  _onChange() {
-    this.setState(getStateFromStores());
+  redirectUnauthorizedUsers() {
     if (AppStore.userIsUnauthorized()) {
       this.history.pushState(null, '/login');
     }
+  },
+
+  _onChange() {
+    this.setState(getStateFromStores());
+    this.redirectUnauthorizedUsers();
   },
 
   toggleMobilePanel() {
     this.setState({
       mobilePanelVisible: this.state.mobilePanelVisible ? false : true
     });
+  },
+
+  getPageWrapperClasses() {
+    let sectionsLength = 0;
+    if (this.state.allCategories.length) {
+      sectionsLength = this.state.allCategories[0].sections.length;
+    }
+    return classNames(
+      {'page-wrapper': true},
+      {'height-fix': sectionsLength === 0}
+    );
   },
 
   render() {
@@ -78,6 +95,8 @@ const App = React.createClass({
     let searchViewPlaceholder;
     let params = this.props.params;
     let user = this.state.user;
+    let categories = this.state.allCategories;
+    let pageWrapperClasses = this.getPageWrapperClasses();
 
     if (MobilePanelVisible) {
       classes += ' move-right';
@@ -89,13 +108,13 @@ const App = React.createClass({
     }
 
     return (
-      <div>
+      <div className={pageWrapperClasses}>
         {searchViewPlaceholder}
         <div className={classes}>
           <div className='inner-wrap'>
-            <Header toggleMobilePanel={this.toggleMobilePanel} toggleAdminMode={this.toggleAdminMode} />
-            <Menu user={user} userIsAdmin={userIsAdmin} categories={this.state.allCategories} />
-            <Content userIsAdmin={userIsAdmin} params={params} categories={this.state.allCategories} ref='content' />
+            <Header toggleMobilePanel={this.toggleMobilePanel} />
+            <Menu user={user} userIsAdmin={userIsAdmin} categories={categories} toggleAdminMode={this.toggleAdminMode} />
+            <Content userIsAdmin={userIsAdmin} params={params} categories={categories} ref='content' />
           </div>
         </div>
       </div>

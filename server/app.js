@@ -95,9 +95,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/categories', ensureApiAuthenticated, categories);
-app.use('/components', ensureApiAuthenticated, components);
-app.use('/user', ensureApiAuthenticated, user);
+// app.use('/categories', ensureApiAuthenticated, categories);
+// app.use('/components', ensureApiAuthenticated, components);
+// app.use('/user', ensureApiAuthenticated, user);
+app.use('/categories', categories);
+app.use('/components', components);
 
 app.use('/search', ensureApiAuthenticated, search);
 

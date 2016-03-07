@@ -20,11 +20,6 @@ const Header = React.createClass({
             </button>
             <SearchInputComponent />
           </div>
-          <ul className='nav navbar-bar navbar-right'>
-            <li>
-              <button className='pull-right' onClick={this.props.toggleAdminMode}>toggle admin mode</button>
-            </li>
-          </ul>
         </nav>
       );
   }

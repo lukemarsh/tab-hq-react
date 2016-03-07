@@ -41,6 +41,10 @@ const PageComponent = React.createClass({
     Api.getAllComponents(this.props.sectionId);
   },
 
+  componentWillUnmount() {
+    ComponentStore.clearAllBySectionId(this.props.sectionId)
+  },
+
   render() {
     let template = this.props.template;
     let components = this.state.allComponents;

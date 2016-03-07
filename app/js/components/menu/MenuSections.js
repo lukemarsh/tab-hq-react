@@ -29,6 +29,7 @@ const MenuSections = React.createClass({
     let category = this.props.category;
     let isVisible = this.props.isVisible;
     let userIsAdmin = this.props.userIsAdmin;
+    let scrolledToSection = this.state.scrolledToSection;
 
     this.loadDraggableData(this.props.category.sections);
 
@@ -37,17 +38,18 @@ const MenuSections = React.createClass({
     };
 
     if (category.sections.length) {
+      if (!scrolledToSection && this.props.index === 0) {
+        scrolledToSection = category.sections[0].id;
+      }
+
       category.sections = _.sortBy(category.sections, 'order');
       return (
         <div onDragOver={this.dragOver} style={ inlineStyles }>
           <ul>
             {category.sections.map((section, index) => {
-              let currentSectionStyle = {};
-              if (this.state.scrolledToSection) {
-                currentSectionStyle = {
-                  fontWeight: this.state.scrolledToSection === section.id ? 'bold' : 'normal'
-                };
-              }
+              let currentSectionStyle = {
+                fontWeight: scrolledToSection === section.id ? 'bold' : 'normal'
+              };
 
               return (
                 <li className='full-section' key={section.id} data-order={section.order} style={ currentSectionStyle } onClick={this.handleClick.bind(this, section)}>

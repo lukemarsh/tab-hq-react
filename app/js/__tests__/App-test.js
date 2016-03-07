@@ -3,15 +3,13 @@ jest.autoMockOff();
 import React from 'react';
 import { render } from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
+import classNames from 'classnames';
 
 const App = require('../App');
-const AppStore = require('../stores/AppStore');
-
-let routes, node;
 
 describe('App', function() {
 
-  var AppElement = TestUtils.renderIntoDocument(<App />);
+  const AppElement = TestUtils.renderIntoDocument(<App />);
 
   describe('getInitialState()', function() {
 
@@ -45,8 +43,8 @@ describe('App', function() {
 
   describe('toggleMobilePanel()', function() {
 
-    var mobilePanelButton = TestUtils.scryRenderedDOMComponentsWithClass(AppElement, 'navbar-toggle')[0];
-    var pageContainer = TestUtils.scryRenderedDOMComponentsWithClass(AppElement, 'off-canvas-wrap')[0];
+    const mobilePanelButton = TestUtils.scryRenderedDOMComponentsWithClass(AppElement, 'navbar-toggle')[0];
+    const pageContainer = TestUtils.scryRenderedDOMComponentsWithClass(AppElement, 'off-canvas-wrap')[0];
 
     it('Closed mobile panel', function() {
       expect(pageContainer.classList.toString()).not.toContain('move-right');
@@ -55,6 +53,24 @@ describe('App', function() {
     it('Open mobile panel', function() {
       TestUtils.Simulate.click(mobilePanelButton);
       expect(pageContainer.classList.toString()).toContain('move-right');
+    });
+
+  });
+
+  describe('getPageWrapperClasses()', function() {
+    it ('height-fix class should be applied if there are no categories', function() {
+      expect(AppElement.getPageWrapperClasses()).toContain('height-fix');
+    });
+
+    afterEach(function() {
+      AppElement.state.allCategories = [{
+        id: 1,
+        sections: [{}]
+      }];
+    });
+
+    it ('height-fix class should not be applied if there are sections', function() {
+      expect(AppElement.getPageWrapperClasses()).not.toContain('height-fix');
     });
 
   });

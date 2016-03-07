@@ -42,8 +42,8 @@ const Accordion = React.createClass({
     this.loadDraggableData(this.props.categories);
 
     items = _.sortBy(items, 'order');
-    items.map((item) => {
-      categories.push(<Category key={item.id} userIsAdmin={userIsAdmin} category={item} mouseDown={this.mouseDown} dragEnd={this.dragEnd} dragStart={this.dragStart} />);
+    items.map((item, index) => {
+      categories.push(<Category index={index} key={item.id} userIsAdmin={userIsAdmin} category={item} mouseDown={this.mouseDown} dragEnd={this.dragEnd} dragStart={this.dragStart} />);
     });
 
     return (

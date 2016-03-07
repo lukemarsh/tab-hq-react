@@ -8,7 +8,8 @@ var jestConfig = {
     'node_modules/react',
     'node_modules/react-dom',
     'node_modules/react-addons-test-utils',
-    'node_modules/fbjs'
+    'node_modules/fbjs',
+    'node_modules/reflux'
   ],
   testPathIgnorePatterns: [
     "node_modules",

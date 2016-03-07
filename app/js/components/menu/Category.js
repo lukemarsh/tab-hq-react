@@ -122,7 +122,7 @@ const Category = React.createClass({
           <h3 className={ classes } onClick={this.handleClick}>
             {categoryName}
           </h3>
-          <MenuSections userIsAdmin={userIsAdmin} category={category} isVisible={this.state.isVisible} />
+          <MenuSections index={this.props.index} userIsAdmin={userIsAdmin} category={category} isVisible={this.state.isVisible} />
         </div>
       );
   }

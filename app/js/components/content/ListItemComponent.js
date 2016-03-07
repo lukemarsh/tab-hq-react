@@ -229,7 +229,7 @@ const ListItemComponent = React.createClass({
       lastUpdated = '';
       url = (<span className='item-type'>
               { userIsAdmin ?
-                <input style={urlInputStyle} placeholder='Enter a URL' type='text'
+                <input tabIndex='2' style={urlInputStyle} placeholder='Enter a URL' type='text'
                 maxLength='20' ref='listItemUrlInput' name='url' value={this.state.url}
                 onChange={this.handleUrlInputChange} onKeyDown={this.updateUrl} />
               : null }
@@ -257,7 +257,7 @@ const ListItemComponent = React.createClass({
             <form>
               <h3>
                 { userIsAdmin ?
-                  <input style={titleInputStyle} placeholder='Enter a title' type='text'
+                  <input tabIndex='1' style={titleInputStyle} placeholder='Enter a title' type='text'
                   maxLength='20' ref='listItemInput' name='title' value={this.state.title}
                   onChange={this.handleTitleInputChange} onKeyDown={this.updateTitle} />
                 : null }

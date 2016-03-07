@@ -34,7 +34,7 @@ const ContentSection = React.createClass({
     this.setState({
       isEditing: true
     }, () => {
-      ReactDOM.findDOMNode(this.refs.sectionInput).focus();
+      // ReactDOM.findDOMNode(this.refs.sectionInput).focus();
     });
   },
 
@@ -80,7 +80,7 @@ const ContentSection = React.createClass({
     let section = this.props.section;
     let sectionId = section.id;
     let userIsAdmin = this.props.userIsAdmin;
-    let titleInputStyle = { display: this.state.isEditing ? 'block' : 'none' };
+    // let titleInputStyle = { display: this.state.isEditing ? 'block' : 'none' };
     let titleStyle = { display: !(this.state.isEditing && userIsAdmin) ? 'block' : 'none' };
     let sectionActions;
     let sectionHeading = <div>
@@ -92,13 +92,11 @@ const ContentSection = React.createClass({
 
     if (userIsAdmin) {
       sectionHeading = <div>
-        <input style={titleInputStyle} type='text' maxLength='20' ref='sectionInput'
+        <input type='text' maxLength='20' ref='sectionInput'
         name='title' value={this.state.sectionName} onChange={this.handleInputChange}
         onKeyDown={this.update} />
-        <span style={titleStyle}>{section.title}</span>
       </div>
       sectionActions = <div className='actions'>
-        <i className='fa fa-pencil fa-2x' onClick={this.handleEditSectionName}></i>
         <i className='fa fa-trash-o fa-2x' onClick={this.deleteSection}></i>
       </div>;
     }
