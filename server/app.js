@@ -21,7 +21,7 @@ var User = require('./models/User')
 var port = process.env.PORT || '3000';
 var http = require('http');
 
-mongoose.connect(config.db.mongodb);
+// mongoose.connect(config.db.mongodb);
 
 var app = express();
 app.use(bodyParser.json()); // support json encoded bodies
