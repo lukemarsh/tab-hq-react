@@ -7,7 +7,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('./config');
-var secrets = require('./secrets');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -20,6 +19,24 @@ var search = require('./routes/search');
 var User = require('./models/User')
 var port = process.env.PORT || '3000';
 var http = require('http');
+var secrets;
+var googleClientId;
+var googleClientSecret;
+var googleCallbackURL;
+var sessionSecret;
+
+if (process.ENV.GOOGLE_CLIENT_ID) {
+  googleClientId = process.ENV.GOOGLE_CLIENT_ID;
+  googleClientSecret = process.ENV.GOOGLE_CLIENT_SECRET;
+  googleCallbackURL = process.ENV.GOOGLE_CALLBACK_URL;
+  sessionSecret = process.ENV.SESSION_SECRET;
+} else {
+  secrets = require('./secrets');
+  googleClientId = secrets.google.clientID;
+  googleClientSecret = secrets.google.clientSecret;
+  googleCallbackURL = secrets.google.callbackURL;
+  sessionSecret = secrets.session.secret;
+}
 
 // mongoose.connect(config.db.mongodb);
 
@@ -30,15 +47,15 @@ app.use('/docs', express.static(path.join(__dirname, 'docs')));
 
 app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  secret: secrets.session.secret,
+  secret: sessionSecret,
   saveUninitialized: false, // don't create session until something stored
   resave: false //don't save session if unmodified
 }));
 
 passport.use(new GoogleStrategy({
-    clientID: secrets.google.clientID,
-    clientSecret: secrets.google.clientSecret,
-    callbackURL: secrets.google.callbackURL
+    clientID: googleClientId,
+    clientSecret: googleClientSecret,
+    callbackURL: googleCallbackURL
   },
   function(accessToken, refreshToken, profile, done) {
     var userProfile = { displayName: profile.displayName };
