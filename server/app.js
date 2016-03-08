@@ -25,11 +25,11 @@ var googleClientSecret;
 var googleCallbackURL;
 var sessionSecret;
 
-if (process.ENV.GOOGLE_CLIENT_ID) {
-  googleClientId = process.ENV.GOOGLE_CLIENT_ID;
-  googleClientSecret = process.ENV.GOOGLE_CLIENT_SECRET;
-  googleCallbackURL = process.ENV.GOOGLE_CALLBACK_URL;
-  sessionSecret = process.ENV.SESSION_SECRET;
+if (process.env.GOOGLE_CLIENT_ID) {
+  googleClientId = process.env.GOOGLE_CLIENT_ID;
+  googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
+  googleCallbackURL = process.env.GOOGLE_CALLBACK_URL;
+  sessionSecret = process.env.SESSION_SECRET;
 } else {
   secrets = require('./secrets');
   googleClientId = secrets.google.clientID;
