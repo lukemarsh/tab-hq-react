@@ -310,7 +310,7 @@
     },
     "express": {
       "version": "4.13.4",
-      "from": "express@latest",
+      "from": "https://registry.npmjs.org/express/-/express-4.13.4.tgz",
       "resolved": "https://registry.npmjs.org/express/-/express-4.13.4.tgz",
       "dependencies": {
         "accepts": {
@@ -320,7 +320,7 @@
           "dependencies": {
             "mime-types": {
               "version": "2.1.10",
-              "from": "mime-types@>=2.1.10 <2.2.0",
+              "from": "mime-types@>=2.1.6 <2.2.0",
               "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.10.tgz",
               "dependencies": {
                 "mime-db": {
@@ -509,7 +509,7 @@
             },
             "mime-types": {
               "version": "2.1.10",
-              "from": "mime-types@>=2.1.10 <2.2.0",
+              "from": "mime-types@>=2.1.6 <2.2.0",
               "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.10.tgz",
               "dependencies": {
                 "mime-db": {
@@ -1209,6 +1209,40 @@
       "version": "0.1.2",
       "from": "mongoose-findorcreate@>=0.1.2 <0.2.0",
       "resolved": "https://registry.npmjs.org/mongoose-findorcreate/-/mongoose-findorcreate-0.1.2.tgz"
+    },
+    "morgan": {
+      "version": "1.6.1",
+      "from": "morgan@1.6.1",
+      "resolved": "https://registry.npmjs.org/morgan/-/morgan-1.6.1.tgz",
+      "dependencies": {
+        "basic-auth": {
+          "version": "1.0.3",
+          "from": "basic-auth@>=1.0.3 <1.1.0",
+          "resolved": "https://registry.npmjs.org/basic-auth/-/basic-auth-1.0.3.tgz"
+        },
+        "depd": {
+          "version": "1.0.1",
+          "from": "depd@>=1.0.1 <1.1.0",
+          "resolved": "https://registry.npmjs.org/depd/-/depd-1.0.1.tgz"
+        },
+        "on-finished": {
+          "version": "2.3.0",
+          "from": "on-finished@>=2.3.0 <2.4.0",
+          "resolved": "https://registry.npmjs.org/on-finished/-/on-finished-2.3.0.tgz",
+          "dependencies": {
+            "ee-first": {
+              "version": "1.1.1",
+              "from": "ee-first@1.1.1",
+              "resolved": "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
+            }
+          }
+        },
+        "on-headers": {
+          "version": "1.0.1",
+          "from": "on-headers@>=1.0.0 <1.1.0",
+          "resolved": "https://registry.npmjs.org/on-headers/-/on-headers-1.0.1.tgz"
+        }
+      }
     },
     "object-assign": {
       "version": "4.0.1",
