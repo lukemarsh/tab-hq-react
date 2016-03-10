@@ -1,4 +1,4 @@
-#TAB HQ React
+#TAB HQ
 
 ## Contributing
 
@@ -60,8 +60,8 @@ In the first tab/window, from the root of this repository run:
 
 Run the following commands from the root of this repository:
 
-    x> git clone git@github.com:lukemarsh/tab-hq-react.git
-    x> cd tab-hq-react
+    x> git clone git@github.com:lukemarsh/tab-hq.git
+    x> cd tab-hq
     x> npm install
     x> sudo mkdir -p /data/db
     x> chmod 0755 /data/db
