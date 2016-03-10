@@ -1,3 +1,5 @@
+var secrets = require('../../secrets');
+
 var config = {};
 
 config.db = {
@@ -8,5 +10,7 @@ config.elastic = {
   host: 'localhost:9200',
   log: 'warning'
 };
+
+config.secrets = secrets;
 
 module.exports = config;

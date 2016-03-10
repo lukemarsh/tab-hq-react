@@ -7,7 +7,10 @@ import CategoryStore from '../stores/CategoryStore';
 import ComponentStore from '../stores/ComponentStore';
 import AppActions from '../actions/AppActionCreators';
 
-const baseApiUrl = 'http://localhost:3001/';
+let baseApiUrl = '/';
+if (process.env.NODE_ENV === 'production') {
+  baseApiUrl = process.env.BASE_API_URL;
+}
 
 const Api = {
 

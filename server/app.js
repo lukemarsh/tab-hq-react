@@ -19,26 +19,8 @@ var search = require('./routes/search');
 var User = require('./models/User')
 var port = process.env.PORT || '3000';
 var http = require('http');
-var secrets;
-var googleClientId;
-var googleClientSecret;
-var googleCallbackURL;
-var sessionSecret;
 
-if (process.env.GOOGLE_CLIENT_ID) {
-  googleClientId = process.env.GOOGLE_CLIENT_ID;
-  googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
-  googleCallbackURL = process.env.GOOGLE_CALLBACK_URL;
-  sessionSecret = process.env.SESSION_SECRET;
-} else {
-  secrets = require('./secrets');
-  googleClientId = secrets.google.clientID;
-  googleClientSecret = secrets.google.clientSecret;
-  googleCallbackURL = secrets.google.callbackURL;
-  sessionSecret = secrets.session.secret;
-}
-
-// mongoose.connect(config.db.mongodb);
+mongoose.connect(config.db.mongodb);
 
 var app = express();
 app.use(bodyParser.json()); // support json encoded bodies
@@ -47,15 +29,15 @@ app.use('/docs', express.static(path.join(__dirname, 'docs')));
 
 app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  secret: sessionSecret,
+  secret: config.secrets.session.secret,
   saveUninitialized: false, // don't create session until something stored
   resave: false //don't save session if unmodified
 }));
 
 passport.use(new GoogleStrategy({
-    clientID: googleClientId,
-    clientSecret: googleClientSecret,
-    callbackURL: googleCallbackURL
+    clientID: config.secrets.google.clientID,
+    clientSecret: config.secrets.google.clientSecret,
+    callbackURL: config.secrets.google.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
     var userProfile = { displayName: profile.displayName };
@@ -112,11 +94,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-// app.use('/categories', ensureApiAuthenticated, categories);
-// app.use('/components', ensureApiAuthenticated, components);
-// app.use('/user', ensureApiAuthenticated, user);
-app.use('/categories', categories);
-app.use('/components', components);
+app.use('/categories', ensureApiAuthenticated, categories);
+app.use('/components', ensureApiAuthenticated, components);
+app.use('/user', ensureApiAuthenticated, user);
+// app.use('/categories', categories);
+// app.use('/components', components);
 
 app.use('/search', ensureApiAuthenticated, search);
 

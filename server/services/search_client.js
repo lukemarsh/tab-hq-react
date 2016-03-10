@@ -8,7 +8,7 @@ var client = new elasticsearch.Client({
   log: config.elastic.log
 });
 
-function SearchClient(client) { 
+function SearchClient(client) {
   this.client = client;
 }
 
@@ -28,7 +28,7 @@ SearchClient.prototype.search = function(query, titlesOnly, callback) {
     }
   };
 
-  if (titlesOnly) { 
+  if (titlesOnly) {
     searchOptions.type = ['category', 'section'];
   }
 

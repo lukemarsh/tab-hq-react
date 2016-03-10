@@ -14,7 +14,7 @@ var Component = require('../models/Component');
 
 searchClient.deleteAllIndices()
 .then(function (body) {
-  return Category.find({}); 
+  return Category.find({});
 })
 .then(function(categories) {
   if (categories == null) {
@@ -31,7 +31,7 @@ searchClient.deleteAllIndices()
         return q.all(sectionIndexPromises);
       });
   });
-    
+
   return q.all(indexPromises);
 })
 .then (function() {
@@ -47,4 +47,3 @@ searchClient.deleteAllIndices()
 .then(function() {
   mongoose.disconnect();
 });
-
