@@ -22,6 +22,8 @@ var http = require('http');
 
 mongoose.connect(config.db.mongodb);
 
+console.log(config);
+
 var app = express();
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
